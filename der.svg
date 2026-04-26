@@ -1,0 +1,164 @@
+# 🐾 Clínica Veterinária Patinha Feliz
+
+> Sistema de gestão para clínica veterinária desenvolvido em Python com interface gráfica (Tkinter) e banco de dados PostgreSQL.
+
+---
+
+## 📌 Descrição
+
+O **Patinha Feliz** é um sistema de gestão veterinária que permite cadastrar tutores, animais e veterinários, além de registrar e acompanhar consultas. O sistema foi desenvolvido como trabalho acadêmico da disciplina de **Banco de Dados**, integrando conceitos de DDL, DML, DQL e conectividade com banco de dados relacional.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+| Tecnologia | Uso |
+|---|---|
+| **Python 3.10+** | Linguagem principal |
+| **Tkinter** | Interface gráfica (GUI) |
+| **psycopg2** | Conector Python → PostgreSQL |
+| **PostgreSQL 15+** | SGBD relacional |
+
+---
+
+## 🗃️ Modelagem do Banco de Dados
+
+O sistema possui **4 tabelas** relacionadas:
+
+```
+tutores ──< animais ──< consultas >── veterinarios
+```
+
+| Tabela | Descrição |
+|---|---|
+| `tutores` | Donos/responsáveis pelos animais |
+| `animais` | Pacientes da clínica (FK → tutores) |
+| `veterinarios` | Profissionais da clínica |
+| `consultas` | Atendimentos realizados (FK → animais, veterinarios) |
+
+---
+
+## 📁 Estrutura do Repositório
+
+```
+clinica_veterinaria/
+├── diagrama/
+│   └── der.png                  # Diagrama Entidade-Relacionamento
+├── ddl/
+│   └── create_tables.sql        # Criação das tabelas e constraints
+├── dml/
+│   └── dados_exemplo.sql        # INSERTs, UPDATEs e DELETEs de exemplo
+├── dql/
+│   └── consultas.sql            # Consultas com INNER JOIN, LEFT JOIN, filtros
+├── src/
+│   ├── app.py                   # Aplicação principal
+│   └── requirements.txt         # Dependências Python
+└── README.md
+```
+
+---
+
+## 🚀 Instruções de Execução
+
+### 1. Pré-requisitos
+
+- Python 3.10 ou superior instalado
+- PostgreSQL 15 instalado e rodando
+- pip atualizado
+
+### 2. Configurar o Banco de Dados
+
+```sql
+-- No psql ou pgAdmin, crie o banco:
+CREATE DATABASE clinica_vet;
+```
+
+Em seguida, execute os scripts na ordem:
+
+```bash
+psql -U postgres -d clinica_vet -f ddl/create_tables.sql
+psql -U postgres -d clinica_vet -f dml/dados_exemplo.sql
+```
+
+### 3. Configurar a Aplicação
+
+Abra o arquivo `src/app.py` e ajuste as configurações de conexão:
+
+```python
+DB_CONFIG = {
+    "host":     "localhost",
+    "port":     5432,
+    "dbname":   "clinica_vet",
+    "user":     "postgres",
+    "password": "SUA_SENHA_AQUI",   # ← altere aqui
+}
+```
+
+### 4. Instalar Dependências
+
+```bash
+pip install -r src/requirements.txt
+```
+
+### 5. Executar a Aplicação
+
+```bash
+python src/app.py
+```
+
+### 6. Login no Sistema
+
+| Campo | Valor |
+|---|---|
+| Usuário | `admin` |
+| Senha | `1234` |
+
+---
+
+## 📸 Prints da Aplicação
+
+> *(Adicione aqui os screenshots após rodar a aplicação)*
+
+| Tela | Descrição |
+|---|---|
+| ![Login](prints/login.png) | Tela de login com autenticação |
+| ![Menu](prints/menu.png) | Menu principal / Dashboard |
+| ![JOIN](prints/relatorio_join.png) | Relatório com INNER JOIN e LEFT JOIN |
+
+---
+
+## 🔗 Funcionalidades
+
+### ✅ CRUD Completo
+- **Tutores**: Cadastro, edição, exclusão e listagem com busca
+- **Animais**: Vinculados a tutores, com filtro e ordenação
+- **Veterinários**: Com status ativo/inativo
+- **Consultas**: Registro completo com diagnóstico e prescrição
+
+### 🔍 Consultas com JOIN
+- **INNER JOIN**: Consultas completas com dados de animal, tutor e veterinário
+- **LEFT JOIN**: Animais com ou sem consultas registradas
+- **Filtros**: Busca por texto e intervalo de datas
+- **Ordenação**: Por qualquer coluna nas telas de listagem
+
+### 💰 Relatórios
+- Consultas completas (INNER JOIN de 4 tabelas)
+- Animais sem consulta (LEFT JOIN)
+- Faturamento por veterinário
+- Filtro por período de datas
+
+---
+
+## 🎥 Vídeo Demonstrativo
+
+> 🎬 **Link do vídeo**: *(adicione aqui o link do YouTube ou Google Drive)*
+
+---
+
+## 👤 Autor
+
+**Nome:** *(Seu nome completo)*  
+**Matrícula:** *(Sua matrícula)*  
+**Disciplina:** Banco de Dados  
+**Professor:** Anderson Costa  
+**Instituição:** UNIFSA  
